@@ -6,23 +6,29 @@ import time
 
 def obtener_Mensaje_whatsapp(message):
     if 'type' not in message:
-        text = 'mensaje no reconocido'
-        return text
-
+        return None  # En lugar de 'mensaje no reconocido'
+    
     typeMessage = message['type']
+    
     if typeMessage == 'text':
-        text = message['text']['body']
+        return message['text']['body']
+    
     elif typeMessage == 'button':
-        text = message['button']['text']
+        return message['button']['text']
+    
     elif typeMessage == 'interactive' and message['interactive']['type'] == 'list_reply':
-        text = message['interactive']['list_reply']['title']
+        return message['interactive']['list_reply']['title']
+    
     elif typeMessage == 'interactive' and message['interactive']['type'] == 'button_reply':
-        text = message['interactive']['button_reply']['title']
+        return message['interactive']['button_reply']['title']
+    
+    # Tipos no soportados
+    elif typeMessage in ['image', 'video', 'audio', 'document', 'sticker', 'location', 'contacts']:
+        return None
+    
     else:
-        text = 'mensaje no procesado'
-    
-    
-    return text
+        return None
+
 
 
 def enviar_Mensaje_whatsapp(data):
