@@ -241,13 +241,14 @@ def administrar_chatbot(text,number, messageId, name):
         listReply = listReply_Message(number, options, body, footer, "sed1", messageId)
         list.append(listReply)
 
-    elif "Calendario Academico" in text:
-        #data = text_Message(number, "Aquí tienes las fechas importantes:\n\n- Solicitud de descuentos:  Inicio de clases: 1 de agosto\n- Fin de semestre: 15 de diciembre\n- Vacaciones: 20 de diciembre - 10 de enero")
-        #enviar_Mensaje_whatsapp(data)
-
+    elif "calendario Academico" in text:
         document = document_Message(number, sett.document_url, "Te comparto el calendario academico:", "Calendario_2025.pdf")
         enviar_Mensaje_whatsapp(document)
         time.sleep(3)
+
+        data = text_Message(number, "Para el segundo semestre del 2025 puedes encontrar las fechas asi:\n\n- En la pagina 8 puedes encontrar las fechas de solicitud de descuentos, creditos de icetex, pagos de matricula.\n- En la pagina 9 encontraras las fechas de inscripciones y matriculas academicas.\n- En la pagina 10 fechas de incio de clases y grados.\n- En la pagina 11 fechas de registro de calificaciones.\n- En la pagina 12 cancelaciones de cursos, semestre, finalizacion de clases, habilitaciones y supletorios.\n- En la pagina 13 fechas de cursos vacacionales, receso por vacaciones y regreso de vacaciones.")
+        enviar_Mensaje_whatsapp(data)
+
         body = "¿Necesitas ayuda con algo más?"
         footer = "Universidad de Santander - UDES"
         options = ["✅ Si, por favor", "❌ No, gracias"]

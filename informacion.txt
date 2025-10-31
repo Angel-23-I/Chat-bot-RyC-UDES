@@ -681,5 +681,5 @@ En la pagina 9 encontraras las fechas de inscripciones y matriculas academicas.
 En la pagina 10 fechas de incio de clases y grados.
 En la pagina 11 fechas de registro de calificaciones.
 En la pagina 12 cancelaciones de cursos, semestre, finalizacion de clases, habilitaciones y supletorios.
-En la pagina 13 fehcas de cursos vacacionales, receso por vacaciones y regreso de vacaciones.
+En la pagina 13 fechas de cursos vacacionales, receso por vacaciones y regreso de vacaciones.
 
