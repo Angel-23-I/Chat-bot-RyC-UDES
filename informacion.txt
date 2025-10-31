@@ -227,11 +227,11 @@ Campus Valledupar: https://valledupar.udes.edu.co/calendario-academico
 ¿Cómo se hace una solicitud de cambio de salón?
 Para cambios de aulas, el programa académico, debe enviar la solicitud a los siguientes correos, de acuerdo al campus, para verificar la disponibilidad durante las 16 semanas del semestre académico y si es posible reasignar el salón asignado.
 
-Bucaramanga:  
+Campus Bucaramanga: sec.ryc@udes.edu.co / sec.ryc5@udes.edu.co
 
-Cúcuta: 
+Campus Cúcuta: soporteadmisiones@cucuta.udes.edu.co
 
-Valledupar: 
+Campus Valledupar: dbayona@valledupar.udes.edu.co/ypinzon@valledupar.udes.edu.co
 
 ---
 
@@ -670,3 +670,16 @@ Cúcuta: aux_registro1@cucuta.udes.edu.co / aux_registro3@cucuta.udes.edu.co
 Valledupar: asocarras@valledupar.udes.edu.co con copia al Coordinador al correo: dbayona@valledupar.udes.edu.co
 
 El tiempo de respuesta por parte de Registro y Control Académico es de 24 horas.
+
+---
+
+Todas las consultas relacionadas con fechas responder: 
+
+Las fechas las puedes encontrar en el calendario academico : https://udes.edu.co/images/micrositios/registro-control/calendario-academico/calendario-academico-del-2025.pdf
+En la pagina 8 puedes encontrar las fechas de solicitud de descuentos, creditos de icetex, pagos de matricula.
+En la pagina 9 encontraras las fechas de inscripciones y matriculas academicas.
+En la pagina 10 fechas de incio de clases y grados.
+En la pagina 11 fechas de registro de calificaciones.
+En la pagina 12 cancelaciones de cursos, semestre, finalizacion de clases, habilitaciones y supletorios.
+En la pagina 13 fehcas de cursos vacacionales, receso por vacaciones y regreso de vacaciones.
+

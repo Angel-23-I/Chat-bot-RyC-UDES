@@ -69,7 +69,7 @@ def recibir_mensajes():
             services.administrar_chatbot(text, number, messageId, name)
         else:
             app.logger.warning(f"Tipo de mensaje no soportado: {message.get('type', 'unknown')}")
-            # Opcional: enviar mensaje al usuario indicando tipo no soportado
+            # Enviar mensaje al usuario indicando tipo no soportado
             data = services.text_Message(number, "Lo siento, ese tipo de mensaje no está soportado. Por favor envía texto.")
             services.enviar_Mensaje_whatsapp(data)
 

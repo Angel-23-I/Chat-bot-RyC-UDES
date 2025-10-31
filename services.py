@@ -236,16 +236,16 @@ def administrar_chatbot(text,number, messageId, name):
         #enviar_Mensaje_whatsapp(data)
         body ="¡Hola! ¡Bienvenido al Chat bot de registro y control de la Universidad de Santander! 👋 ¿En qué puedo ayudarte hoy?"
         footer = "Universidad de Santander - UDES"
-        options = ["Fechas importantes","Procedimientos","Preguntas Frecuentes","Horarios de atención", "Pregunta personalizada"]
+        options = ["Calendario Academico","Procedimientos","Contactos","Horarios de atención", "Pregunta personalizada"]
 
         listReply = listReply_Message(number, options, body, footer, "sed1", messageId)
         list.append(listReply)
 
-    elif "fechas importantes" in text:
-        data = text_Message(number, "Aquí tienes las fechas importantes:\n\n- Inicio de clases: 1 de agosto\n- Fin de semestre: 15 de diciembre\n- Vacaciones: 20 de diciembre - 10 de enero")
-        enviar_Mensaje_whatsapp(data)
+    elif "Calendario Academico" in text:
+        #data = text_Message(number, "Aquí tienes las fechas importantes:\n\n- Solicitud de descuentos:  Inicio de clases: 1 de agosto\n- Fin de semestre: 15 de diciembre\n- Vacaciones: 20 de diciembre - 10 de enero")
+        #enviar_Mensaje_whatsapp(data)
 
-        document = document_Message(number, sett.document_url, "Tambien te comparto el calendario academico:", "Calendario_2025.pdf")
+        document = document_Message(number, sett.document_url, "Te comparto el calendario academico:", "Calendario_2025.pdf")
         enviar_Mensaje_whatsapp(document)
         time.sleep(3)
         body = "¿Necesitas ayuda con algo más?"
@@ -256,7 +256,7 @@ def administrar_chatbot(text,number, messageId, name):
 
     elif "pregunta personalizada" in text:
         set_user_state(number, "awaiting_custom_q1")
-        data = text_Message(number, "🤖 *Modo pregunta personalizada activado*\n\n¿Qué deseas saber sobre algun procedimiento del area de registro y control?\n\nEscribe tu pregunta y te responderé basándome en la información oficial.\n\n_Para volver al menú principal, escribe 'menu'_")
+        data = text_Message(number, "🤖 *Modo pregunta personalizada activado*\n\n¿Qué deseas saber sobre algun procedimiento del area de registro y control?\n\nEscribe tu pregunta y te responderé basándome en la información oficial.\n\n_Especifica el campus (Bucaramanga/Valledupar/Cúcuta)_")
         enviar_Mensaje_whatsapp(data)
 
     elif user_state == "awaiting_custom_q1":
@@ -285,7 +285,7 @@ def administrar_chatbot(text,number, messageId, name):
     elif user_state == "awaiting_custom_q2":
         ai_response = get_ai_response(text, number)
         if ai_response == NO_INFO_MARKER:
-            list.append(text_Message(number, "Sigue sin haber información en la base oficial sobre esa consulta. Puedes consultar nuestra página oficial para más detalles: https://udes.edu.co/registro-y-control-academico/preguntas-frecuentes "))
+            list.append(text_Message(number, "Sigue sin haber información en la base oficial sobre esa consulta. Puedes escribir a uno de los numeros de contacto o puedes consultar nuestra página oficial para más detalles: https://udes.edu.co/registro-y-control-academico/preguntas-frecuentes "))
         else:
             list.append(text_Message(number, ai_response))
         body = "¿Necesitas ayuda con algo más?"
@@ -304,7 +304,7 @@ def administrar_chatbot(text,number, messageId, name):
         list.append(replyButtonData)
 
     elif "matrícula" in text:
-        data = text_Message(number, "Para realizar la matrícula, sigue estos pasos:\n\n1. Ingresa a tu cuenta en el portal estudiantil.\n2. Navega a la sección de 'Matrícula'.\n3. Selecciona los cursos que deseas inscribir.\n4. Confirma tu selección y realiza el pago correspondiente.")
+        data = text_Message(number, "Para realizar la matrícula, sigue estos pasos:\n\n1. Ingresa a tu cuenta en genesis.\n2. Navega a la sección de 'Matrícula'.\n3. Selecciona los cursos que deseas inscribir.\n4. Confirma tu selección. \n Nota: Debes tener la matricula legalizada para poder realizar este proceso.")
         enviar_Mensaje_whatsapp(data)
         document = document_Message(number, sett.matricula_doc, "Aquí tienes la guía de matrícula para más detalles:", "Guia_Matricula_2025.pdf")
         enviar_Mensaje_whatsapp(document)
@@ -325,8 +325,8 @@ def administrar_chatbot(text,number, messageId, name):
         )
         enviar_Mensaje_whatsapp(imageData)
         time.sleep(1)
-    
-        data = text_Message(number, "Para cancelar un curso, sigue estos pasos:\n\n1. Ingresa a tu cuenta en el portal estudiantil.\n2. Navega a la sección de 'Cancelaciones'.\n3. Selecciona el curso que deseas cancelar.\n4. Confirma la cancelación y guarda el comprobante.")
+
+        data = text_Message(number, "Para cancelar un curso, sigue estos pasos:\n\nBucaramanga: https://genesis-buc.udes.edu.co Cúcuta: https://genesis-cuc.udes.edu.co Valledupar: https://genesis-val.udes.edu.co \n2. Allí debe revisar el curso a cancelar y dar clic en el botón rojo \"Cancelar\".\n3. El sistema confirma la acción de cancelación y le enviará un código de seguridad al correo electrónico registrado en el sistema. Digite el código recibido; si los caracteres coinciden, el sistema validará y realizará la operación de cancelación del curso seleccionado. Recuerde que no debe tener ninguna deuda de paz y salvo, en caso de tenerla no podrá cancelar cursos matriculados. La cancelación de cursos de estudiantes condicionales, se debe realizar con el coordinador del programa. No aplica para las cancelaciones de Semestre.\n2. Navega a la sección de 'Cancelaciones'.\n3. Selecciona el curso que deseas cancelar.\n4. Confirma la cancelación y guarda el comprobante.")
         enviar_Mensaje_whatsapp(data)
         body = "¿Necesitas ayuda con algo más?"
         footer = "Universidad de Santander - UDES"
@@ -339,6 +339,16 @@ def administrar_chatbot(text,number, messageId, name):
         enviar_Mensaje_whatsapp(data)
         document = document_Message(number, sett.inscripcion_doc, "Aquí tienes la guía de inscripciones para más detalles:", "Guia_Inscripcion_2025.pdf")
         enviar_Mensaje_whatsapp(document)
+        time.sleep(3)
+        body = "¿Necesitas ayuda con algo más?"
+        footer = "Universidad de Santander - UDES"
+        options = ["✅ Si, por favor", "❌ No, gracias"]
+        replyButtonData = buttonReply_Message(number, options, body, footer, "sed2", messageId)
+        list.append(replyButtonData)
+    
+    elif "contactos" in text:
+        data = text_Message(number, "Puedes comunicarte con nosotros a través de los siguientes números:\n\n- Bucaramanga: +57 7 6344000 Ext. 1401 / 1402\n- Cúcuta: +57 7 5779000 Ext. 1201 / 1202\n- Valledupar: +57 5 6973000 Ext. 1301 / 1302\n\nTambién puedes escribirnos al correo: contacto@udes.edu.co")
+        enviar_Mensaje_whatsapp(data)
         time.sleep(3)
         body = "¿Necesitas ayuda con algo más?"
         footer = "Universidad de Santander - UDES"
