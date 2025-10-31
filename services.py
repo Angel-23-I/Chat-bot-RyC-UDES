@@ -241,7 +241,7 @@ def administrar_chatbot(text,number, messageId, name):
         listReply = listReply_Message(number, options, body, footer, "sed1", messageId)
         list.append(listReply)
 
-    elif "calendario Academico" in text:
+    elif "calendario academico" in text:
         document = document_Message(number, sett.document_url, "Te comparto el calendario academico:", "Calendario_2025.pdf")
         enviar_Mensaje_whatsapp(document)
         time.sleep(3)
