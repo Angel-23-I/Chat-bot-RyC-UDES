@@ -23,6 +23,7 @@ def verificar_token():
     except Exception as e:
         return str(e), 403
 
+# Webhook para recibir mensajes
 @app.route('/webhook', methods=['POST'])
 def recibir_mensajes():
     try:

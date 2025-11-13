@@ -5,6 +5,7 @@ import json
 import time
 
 def obtener_Mensaje_whatsapp(message):
+    # Esta funcion extrae el contenido del mensaje según su tipo 
     if 'type' not in message:
         return None  # En lugar de 'mensaje no reconocido'
     
@@ -32,6 +33,7 @@ def obtener_Mensaje_whatsapp(message):
 
 
 def enviar_Mensaje_whatsapp(data):
+    # Esta funcion envia un mensaje a la API de WhatsApp
     try:
         whatsapp_token = sett.whatsapp_token
         whatsapp_url  = sett.whatsapp_url
@@ -47,6 +49,7 @@ def enviar_Mensaje_whatsapp(data):
         return e,403
 
 def text_Message(number, text):
+    # Esta funcion crea un mensaje de texto para enviar a la API de WhatsApp
     data = json.dumps(
             {
                 "messaging_product": "whatsapp",   
@@ -61,6 +64,7 @@ def text_Message(number, text):
     return data
 
 def buttonReply_Message(number, options, body, footer, sedd, messageId):
+    # Esta funcion crea un mensaje de respuesta con botones para enviar a la API de WhatsApp
     buttons = []
     for i, option in enumerate(options):
         buttons.append({
@@ -94,6 +98,7 @@ def buttonReply_Message(number, options, body, footer, sedd, messageId):
     return data
 
 def listReply_Message (number, options, body, footer, sedd, messageId):
+    # Esta funcion crea un mensaje de respuesta con lista para enviar a la API de WhatsApp
     rows = []
     for i, option in enumerate(options):
         rows.append(
@@ -133,6 +138,7 @@ def listReply_Message (number, options, body, footer, sedd, messageId):
     return data
 
 def document_Message(number, url, caption, filename):
+    # Esta funcion crea un mensaje de documento para enviar a la API de WhatsApp
     data = json.dumps(
         {
             "messaging_product": "whatsapp",
@@ -161,6 +167,7 @@ def get_media_id(media_name , media_type):
     return media_id
 
 def replyReaction_Message(number, messageId, emoji):
+    # Esta funcion crea un mensaje de reaccion para enviar a la API de WhatsApp
     data = json.dumps(
         {
             "messaging_product": "whatsapp",
@@ -176,6 +183,7 @@ def replyReaction_Message(number, messageId, emoji):
     return data
 
 def replyText_Message(number, messageId, text):
+    # Esta funcion crea un mensaje de respuesta de texto para enviar a la API de WhatsApp
     data = json.dumps(
         {
             "messaging_product": "whatsapp",
@@ -193,6 +201,7 @@ def replyText_Message(number, messageId, text):
     return data
 
 def markRead_Message(messageId):
+    # Esta funcion crea un mensaje para marcar como leido en la API de WhatsApp
     data = json.dumps(
         {
             "messaging_product": "whatsapp",
@@ -203,6 +212,7 @@ def markRead_Message(messageId):
     return data
 
 def media_Message_URL(number, image_url, caption=""):
+    # Esta funcion crea un mensaje de media por URL para enviar a la API de WhatsApp
     data = json.dumps(
         {
             "messaging_product": "whatsapp",
@@ -220,7 +230,8 @@ def media_Message_URL(number, image_url, caption=""):
 
 
 def administrar_chatbot(text,number, messageId, name):
-    text = text.lower() #mensaje que enviio el usuario
+    # Esta funcion administra la logica del chatbot
+    text = text.lower() #mensaje que envio el usuario
     list = []
     print("mensaje del usuario: ",text)
 
@@ -242,6 +253,7 @@ def administrar_chatbot(text,number, messageId, name):
         list.append(listReply)
 
     elif "calendario academico" in text:
+        # Enviar mensajes sobre el calendario academico
         document = document_Message(number, sett.document_url, "Te comparto el calendario academico:", "Calendario_2025.pdf")
         enviar_Mensaje_whatsapp(document)
         time.sleep(3)
@@ -286,7 +298,7 @@ def administrar_chatbot(text,number, messageId, name):
     elif user_state == "awaiting_custom_q2":
         ai_response = get_ai_response(text, number)
         if ai_response == NO_INFO_MARKER:
-            list.append(text_Message(number, "Sigue sin haber información en la base oficial sobre esa consulta. Puedes escribir a uno de los numeros de contacto o puedes consultar nuestra página oficial para más detalles: https://udes.edu.co/registro-y-control-academico/preguntas-frecuentes "))
+            list.append(text_Message(number, "Sigue sin haber información en la base oficial sobre esa consulta. Puedes comunicarte a los números de contacto +57 607 6516500 Ext. 1109, 1012, 1113, correo: sec.ryc@udes.edu.co o puedes consultar nuestra página oficial para más detalles: https://udes.edu.co/registro-y-control-academico/preguntas-frecuentes "))
         else:
             list.append(text_Message(number, ai_response))
         body = "¿Necesitas ayuda con algo más?"
@@ -305,6 +317,7 @@ def administrar_chatbot(text,number, messageId, name):
         list.append(replyButtonData)
 
     elif "matrícula" in text:
+        # Enviar mensajes sobre el procedimiento de matricula
         data = text_Message(number, "Para realizar la matrícula, sigue estos pasos:\n\n1. Ingresa a tu cuenta en genesis.\n2. Navega a la sección de 'Matrícula'.\n3. Selecciona los cursos que deseas inscribir.\n4. Confirma tu selección. \n Nota: Debes tener la matricula legalizada para poder realizar este proceso.")
         enviar_Mensaje_whatsapp(data)
         document = document_Message(number, sett.matricula_doc, "Aquí tienes la guía de matrícula para más detalles:", "Guia_Matricula_2025.pdf")
@@ -317,7 +330,8 @@ def administrar_chatbot(text,number, messageId, name):
         list.append(replyButtonData)
 
     elif "cancelaciones" in text:
-        image_url = "https://udes.edu.co/media/k2/items/cache/8c375e48fc385cd83256deb3ac6cc88c_M.jpg?t=20251007_200733"
+        # Enviar mensajes sobre el procedimiento de cancelaciones
+        image_url = "https://udes.edu.co/media/k2/items/cache/8c375e48fc385cd83256deb3ac6cc88c_M.jpg?t=20251007_200733" # Imagen del calendario academico con fechas de cancelaciones
     
         imageData = media_Message_URL(
             number, 
@@ -336,6 +350,7 @@ def administrar_chatbot(text,number, messageId, name):
         list.append(replyButtonData)
 
     elif "inscripciones" in text:
+        # Enviar mensajes sobre el procedimiento de inscripciones
         data = text_Message(number, "Para inscribirte como nuevo aspirante, sigue estos pasos:\n\n1. Visita la página de inscripciones de la UDES.\n2. Completa el formulario de inscripción con tus datos personales.\n3. Adjunta los documentos requeridos.\n4. Envía tu solicitud y espera la confirmación.")
         enviar_Mensaje_whatsapp(data)
         document = document_Message(number, sett.inscripcion_doc, "Aquí tienes la guía de inscripciones para más detalles:", "Guia_Inscripcion_2025.pdf")
@@ -348,7 +363,7 @@ def administrar_chatbot(text,number, messageId, name):
         list.append(replyButtonData)
     
     elif "contactos" in text:
-        data = text_Message(number, "Puedes comunicarte con nosotros a través de los siguientes números:\n\n- Bucaramanga: +57 7 6344000 Ext. 1401 / 1402\n- Cúcuta: +57 7 5779000 Ext. 1201 / 1202\n- Valledupar: +57 5 6973000 Ext. 1301 / 1302\n\nTambién puedes escribirnos al correo: contacto@udes.edu.co")
+        data = text_Message(number, "Puedes comunicarte con nosotros a través de los siguientes números:\n\n- Bucaramanga: +57 607 6516500 Ext. 1109, 1012, 1113\n\nTambién puedes escribirnos al correo: sec.ryc@udes.edu.co, sec.ara2@udes.edu.co, sec.ryc6@udes.edu.co ")
         enviar_Mensaje_whatsapp(data)
         time.sleep(3)
         body = "¿Necesitas ayuda con algo más?"
@@ -373,25 +388,22 @@ def administrar_chatbot(text,number, messageId, name):
     elif "si, por favor" in text:
         body ="¡Claro! ¿En qué más puedo ayudarte?"
         footer = "Universidad de Santander - UDES"
-        options = ["Fechas importantes","Procedimientos","Preguntas Frecuentes","Horarios de atención", "Pregunta personalizada"]
+        options = ["Calendario Academico","Procedimientos","Contactos","Horarios de atención", "Pregunta personalizada"]
 
         listReply = listReply_Message(number, options, body, footer, "sed1", messageId)
         list.append(listReply)
 
-    elif "no, gracias." in text:
+    elif "no, gracias" in text:
         data = text_Message(number, "¡Gracias por contactarnos! Si tienes más preguntas, no dudes en volver. ¡Que tengas un excelente día! 👋")
         enviar_Mensaje_whatsapp(data)
 
     else:
         body ="Lo siento, no entendí tu mensaje. Por favor, selecciona una de las opciones a continuación o escribe 'Hola' para comenzar."
         footer = "Universidad de Santander - UDES"
-        options = ["Fechas importantes","Procedimientos","Preguntas Frecuentes","Horarios de atención", "Pregunta personalizada"]
+        options = ["Calendario Academico","Procedimientos","Contactos","Horarios de atención", "Pregunta personalizada"]
 
         listReply = listReply_Message(number, options, body, footer, "sed1", messageId)
         list.append(listReply)
 
     for item in list:
         enviar_Mensaje_whatsapp(item)
-
-    #data = text_Message(number,"¡Bienvenido al Chat bot de registro y control de la Universidad de Santander! 👋")
-    #enviar_Mensaje_whatsapp(data)

@@ -2,7 +2,7 @@ from groq import Groq
 from sett import api_key_groq
 import os
 
-
+# Función para cargar el contexto desde un archivo de texto
 def load_context():
     """Carga el contexto desde archivo txt"""
     try:
@@ -13,6 +13,7 @@ def load_context():
     
 NO_INFO_MARKER = "NO_INFO"
 
+# Función para obtener respuesta de la IA
 def get_ai_response(query, number):
     try:
         client = Groq(api_key=api_key_groq)
